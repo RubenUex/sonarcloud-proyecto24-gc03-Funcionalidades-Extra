@@ -1,21 +1,14 @@
 package org.openapitools.model;
 
-import java.net.URI;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.jackson.nullable.JsonNullable;
+import org.openapitools.interfaces.LikeInterface;
 
-import java.time.OffsetDateTime;
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.openapitools.modelDB.LikeDB;
 
-
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
@@ -23,7 +16,7 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-25T20:23:24.369695700+02:00[Europe/Madrid]", comments = "Generator version: 7.9.0")
-public class Like {
+public class Like implements LikeInterface {
 
 	private Integer idDeUsuario;
 
@@ -41,9 +34,20 @@ public class Like {
 		this.idDeContenido = idDeContenido;
 	}
 
-	public Like(LikeDB likeDB) {
-		this.idDeContenido = likeDB.getIdDeContenido();
-		this.idDeUsuario = likeDB.getIdDeUsuario();
+	@Override
+	public void getLikeValues(LikeInterface likeInterface) {
+		this.idDeContenido = likeInterface.getIdContenidoLike();
+		this.idDeUsuario = likeInterface.getIdUsuarioLike();
+	}
+
+	@Override
+	public Integer getIdContenidoLike() {
+		return idDeContenido;
+	}
+
+	@Override
+	public Integer getIdUsuarioLike() {
+		return idDeUsuario;
 	}
 
 	public Like idDeUsuario(Integer idDeUsuario) {

@@ -1,6 +1,6 @@
 package org.openapitools.modelDB;
 
-import org.openapitools.model.Like;
+import org.openapitools.interfaces.LikeInterface;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "likes")
 @IdClass(LikeDBId.class) // Clase auxiliar para representar la clave compuesta
-public class LikeDB implements Serializable {
+public class LikeDB implements Serializable, LikeInterface {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,9 +30,19 @@ public class LikeDB implements Serializable {
 		this.idDeContenido = idDeContenido;
 	}
 
-	public LikeDB(Like like) {
-		this.idDeContenido = like.getIdDeContenido();
-		this.idDeUsuario = like.getIdDeUsuario();
+	public void getLikeValues(LikeInterface likeInterface) {
+		this.idDeContenido = likeInterface.getIdContenidoLike();
+		this.idDeUsuario = likeInterface.getIdUsuarioLike();
+	}
+
+	@Override
+	public Integer getIdContenidoLike() {
+		return idDeContenido;
+	}
+
+	@Override
+	public Integer getIdUsuarioLike() {
+		return idDeUsuario;
 	}
 
 	// Getters y Setters
