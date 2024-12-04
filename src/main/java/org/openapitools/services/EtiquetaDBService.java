@@ -21,14 +21,17 @@ public class EtiquetaDBService {
     }
 
     private Etiqueta convertToEtiqueta(EtiquetaDB etiquetaDB) {
-        return new Etiqueta(etiquetaDB);
+        Etiqueta etiqueta = new Etiqueta();
+        etiqueta.getEtiquetaValues(etiquetaDB);
+        return etiqueta;
     }
 
     // Create a new Etiqueta
     public boolean createEtiqueta(Etiqueta etiqueta) {
         try {
             // Convert Etiqueta to EtiquetaDB
-            EtiquetaDB etiquetaDB = new EtiquetaDB(etiqueta);
+            EtiquetaDB etiquetaDB = new EtiquetaDB();
+            etiquetaDB.getEtiquetaValues(etiqueta);
             // Save the EtiquetaDB entity
             EtiquetasDBRepository.save(etiquetaDB);
             return true; // Indicate success
