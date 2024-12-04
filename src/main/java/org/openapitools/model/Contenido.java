@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.openapitools.modelDB.ContenidoDB;
+import org.openapitools.interfaces.ContenidoInterface;
 
 import javax.annotation.Generated;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-25T20:23:40.033986300+02:00[Europe/Madrid]", comments = "Generator version: 7.9.0")
-public class Contenido {
+public class Contenido implements ContenidoInterface {
 
 	private Integer id;
 
@@ -104,18 +104,29 @@ public class Contenido {
 		this.etiquetaIds = etiquetaIds;
 	}
 
-	public Contenido(ContenidoDB contenidoDB) {
-		this.id = contenidoDB.getId();
-		this.tipo = TipoEnum.fromValue(contenidoDB.getTipo());
-		this.titulo = contenidoDB.getTitulo();
-		this.productionYear = contenidoDB.getProductionYear();
-		this.clasificacionEdad = contenidoDB.getClasificacionEdad();
-		this.descripcion = contenidoDB.getDescripcion();
-		this.perteneceA = contenidoDB.getPerteneceA();
-		this.numeroElementos = contenidoDB.getNumeroElementos();
-		this.duracion = contenidoDB.getDuracion();
-		this.url = contenidoDB.getUrl();
-		this.etiquetaIds = contenidoDB.getEtiquetaIds();
+	@Override
+	public void getContenidoValues(ContenidoInterface contenidoInterface) {
+		this.id = contenidoInterface.getIdContenido();
+		this.tipo = TipoEnum.fromValue(contenidoInterface.getTipoContenido());
+		this.titulo = contenidoInterface.getTitulo();
+		this.productionYear = contenidoInterface.getProductionYear();
+		this.clasificacionEdad = contenidoInterface.getClasificacionEdad();
+		this.descripcion = contenidoInterface.getDescripcion();
+		this.perteneceA = contenidoInterface.getPerteneceA();
+		this.numeroElementos = contenidoInterface.getNumeroElementos();
+		this.duracion = contenidoInterface.getDuracion();
+		this.url = contenidoInterface.getUrl();
+		this.etiquetaIds = contenidoInterface.getEtiquetaIds();
+	}
+
+	@Override
+	public Integer getIdContenido() {
+		return id;
+	}
+
+	@Override
+	public String getTipoContenido() {
+		return tipo.toString();
 	}
 
 	/**
