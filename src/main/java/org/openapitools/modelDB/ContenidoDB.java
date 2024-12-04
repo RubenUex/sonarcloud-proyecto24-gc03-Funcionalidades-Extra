@@ -1,13 +1,13 @@
 package org.openapitools.modelDB;
 
-import org.openapitools.model.Contenido;
+import org.openapitools.interfaces.ContenidoInterface;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "Contenido")
-public class ContenidoDB {
+public class ContenidoDB implements ContenidoInterface{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -63,17 +63,28 @@ public class ContenidoDB {
 		this.etiquetaIds = etiquetaIds;
 	}
 
-	public ContenidoDB(Contenido contenido) {
-		this.tipo = contenido.getTipo().toString();
-		this.titulo = contenido.getTitulo();
-		this.productionYear = contenido.getProductionYear();
-		this.clasificacionEdad = contenido.getClasificacionEdad();
-		this.descripcion = contenido.getDescripcion();
-		this.numeroElementos = contenido.getNumeroElementos();
-		this.duracion = contenido.getDuracion();
-		this.url = contenido.getUrl();
-		this.perteneceA = contenido.getPerteneceA();
-		this.etiquetaIds = contenido.getEtiquetaIds();
+	@Override
+	public void getContenidoValues(ContenidoInterface contenidoInterface) {
+		this.tipo = contenidoInterface.getTipoContenido();
+		this.titulo = contenidoInterface.getTitulo();
+		this.productionYear = contenidoInterface.getProductionYear();
+		this.clasificacionEdad = contenidoInterface.getClasificacionEdad();
+		this.descripcion = contenidoInterface.getDescripcion();
+		this.numeroElementos = contenidoInterface.getNumeroElementos();
+		this.duracion = contenidoInterface.getDuracion();
+		this.url = contenidoInterface.getUrl();
+		this.perteneceA = contenidoInterface.getPerteneceA();
+		this.etiquetaIds = contenidoInterface.getEtiquetaIds();
+	}
+
+	@Override
+	public Integer getIdContenido() {
+		return id;
+	}
+
+	@Override
+	public String getTipoContenido() {
+		return tipo;
 	}
 
 	// Getters and Setters
