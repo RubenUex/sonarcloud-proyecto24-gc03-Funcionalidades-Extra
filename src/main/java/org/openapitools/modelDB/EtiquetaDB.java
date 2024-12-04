@@ -1,5 +1,6 @@
 package org.openapitools.modelDB;
 
+import org.openapitools.interfaces.EtiquetaInterface;
 import org.openapitools.model.Etiqueta;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Etiquetas")
-public class EtiquetaDB {
+public class EtiquetaDB implements EtiquetaInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,12 +23,13 @@ public class EtiquetaDB {
         this.nombre = nombre;
     }
 
-    public EtiquetaDB(Etiqueta etiqueta){
-        this.nombre = etiqueta.getNombre();
-        this.id = etiqueta.getIdEtiqueta();
+    @Override
+    public void getEtiquetaValues(EtiquetaInterface etiquetaInterface) {
+        this.nombre = etiquetaInterface.getNombre();
+        this.id = etiquetaInterface.getIdEtiqueta();
     }
 
-    public Integer getId() {
+    public Integer getIdEtiqueta() {
         return id;
     }
 

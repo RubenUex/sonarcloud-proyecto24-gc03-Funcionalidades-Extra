@@ -60,7 +60,9 @@ public class LikeDBService {
 	public Like findLikeByIds(Integer idDeUsuario, Integer idDeContenido) {
 		Optional<LikeDB> likeDB = likeDBRepository.findByIdDeUsuarioAndIdDeContenido(idDeUsuario, idDeContenido);
 		if (likeDB.isPresent()) {
-			return new Like(likeDB.get());
+			Like like = new Like();
+			like.getLikeValues(likeDB.get());
+			return like;
 		} else {
 			return null;
 		}

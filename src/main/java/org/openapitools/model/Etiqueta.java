@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import org.openapitools.interfaces.EtiquetaInterface;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -20,7 +21,7 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-25T20:23:24.369695700+02:00[Europe/Madrid]", comments = "Generator version: 7.9.0")
-public class Etiqueta {
+public class Etiqueta implements EtiquetaInterface {
 
   private String nombre;
 
@@ -43,16 +44,17 @@ public class Etiqueta {
     return this;
   }
 
-  public Etiqueta(EtiquetaDB etiquetaDB) {
-    this.nombre = etiquetaDB.getNombre();
-    this.idEtiqueta = etiquetaDB.getId();
+  @Override
+  public void getEtiquetaValues(EtiquetaInterface etiquetaInterface) {
+    this.nombre = etiquetaInterface.getNombre();
+    this.idEtiqueta = etiquetaInterface.getIdEtiqueta();
   }
 
   /**
    * Nombre de la etiqueta
    * @return nombre
    */
-  @NotNull 
+  @NotNull
   @Schema(name = "nombre", description = "Nombre de la etiqueta", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("nombre")
   public String getNombre() {
@@ -72,7 +74,7 @@ public class Etiqueta {
    * Identificador de la etiqueta
    * @return idEtiqueta
    */
-  @NotNull 
+  @NotNull
   @Schema(name = "id_etiqueta", description = "Identificador de la etiqueta", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("id_etiqueta")
   public Integer getIdEtiqueta() {
@@ -93,7 +95,7 @@ public class Etiqueta {
     }
     Etiqueta etiqueta = (Etiqueta) o;
     return Objects.equals(this.nombre, etiqueta.nombre) &&
-        Objects.equals(this.idEtiqueta, etiqueta.idEtiqueta);
+            Objects.equals(this.idEtiqueta, etiqueta.idEtiqueta);
   }
 
   @Override
